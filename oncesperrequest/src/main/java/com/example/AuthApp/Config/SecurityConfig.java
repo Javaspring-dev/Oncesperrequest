@@ -26,12 +26,12 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register", "/login").permitAll() // Allow public access to register and login
-                        .requestMatchers("/h2-console/**").permitAll() // Allow public access to H2 console
-                        .anyRequest().authenticated()) // Protect all other endpoints
-                .headers(headers -> headers.frameOptions().disable()) // Allow H2 console frames
+                        .requestMatchers("/register", "/login").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .anyRequest().authenticated())
+                .headers(headers -> headers.frameOptions().disable())
                 .formLogin(form -> form
-                        .loginProcessingUrl("/login") // This endpoint will handle login POST requests
+                        .loginProcessingUrl("/login")
                         .successHandler((request, response, authentication) -> {
                             response.setStatus(HttpServletResponse.SC_OK);
                             response.getWriter().write("Login successful");
@@ -47,8 +47,8 @@ public class SecurityConfig {
                             response.setStatus(HttpServletResponse.SC_OK);
                             response.getWriter().write("Logout successful");
                         })
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID"));
+                        .invalidateHttpSession(true));
+
 
         return http.build();
     }

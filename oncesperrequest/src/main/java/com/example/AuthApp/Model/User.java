@@ -16,7 +16,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private String role; // USER or ADMIN
+    private String role; 
 
     public Long getId() {
         return id;
